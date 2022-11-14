@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+
+  <param name="/use_sim_time" value="true" />
+  <arg name="pause_rosbag" value="true" />
+  <arg name="file" default="$(find arg_data_croix_en_ternois)/bagfile/devbot_lap0.bag" />
+    
+  <!-- play the rosbag from a training session from the racetrack Croix en Ternois in France -->
+  <node pkg="rosbag" type="play" name="rosbag_arg_devbot_lap" if="$(arg pause_rosbag)" output="screen" args="--clock --pause $(arg file) /tf:=/tf_old /ndt_pose:=/ndt_pose_old"/>
+  <node pkg="rosbag" type="play" name="rosbag_arg_devbot_lap" unless="$(arg pause_rosbag)" output="screen" args="--clock $(arg file) /tf:=/tf_old /ndt_pose:=/ndt_pose_old"/>
+  
+</launch>
+
